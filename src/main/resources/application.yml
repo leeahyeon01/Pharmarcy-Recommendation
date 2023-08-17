@@ -1,0 +1,41 @@
+#Spring Profile은 어플리케이션 설정을 특정 환경에서만
+#적용되게 하거나 환경별 (local,devlop,pro)로 다르게 적용할 때 사용 !
+spring:
+  profiles:
+    active: local #default
+    group:
+      local:
+      - common
+      prod:
+      - common
+
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+    datasource:
+      driver-class-name: org.mariadb.jdbc.Driver
+      url: jdbc:mariadb://localhost:3307/pharmacy-recommendation
+      username: ${SPRING_DATASOURCE_USERNAME}
+      password: ${SPRING_DATASOURCE_PASSWORD}
+  redis:
+    host: localhost
+    port: 6379
+    #jpa 설정
+    jpa:
+      hibernate:
+        ddl-auto: create #개발환경에서만 create으로 기존 테이블을 drop하고 스키마를 생성함으로
+        show-sql: true
+---
+spring:
+  config:
+    activate:
+      on-profile: common
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+
