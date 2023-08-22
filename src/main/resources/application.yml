@@ -5,10 +5,8 @@ spring:
     active: local # default profile
     group:
       local:
-        - local
         - common
       prod:
-        - prod
         - common
 
 ---
@@ -16,6 +14,12 @@ spring:
   config:
     activate:
       on-profile: common
+#kakao api를 springboot에서 사용하기
+kakao:
+  rest:
+    api:
+      key: ${KAKAO_REST_API_KEY}
+
 
 ---
 spring:
